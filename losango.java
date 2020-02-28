@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class losango
 {
 	public static void losango(int n)
@@ -9,11 +11,15 @@ public class losango
 		{
 			for(int i=1; i<=space;i++)
 			{
-				System.out.print(" ");
+				System.out.print(".");
 			}
 			for (int i=1;i<=star ;i++ ) 
 			{
 				System.out.print("#");
+			}
+			for(int i=1; i<=space;i++)
+			{
+				System.out.print(".");
 			}
 			space--;
 			star+=2;
@@ -23,18 +29,24 @@ public class losango
 		{
 			for(int i=1; i<=space;i++)
 			{
-				System.out.print(" ");
+				System.out.print(".");
 			}
 			for (int i=1;i<=star ;i++ ) 
 			{
 				System.out.print("#");
 			}
+			for(int i=1; i<=space;i++)
+			{
+				System.out.print(".");
+			}
 			star-=2;
 			space++;
-			System.out.println();			}
+			System.out.println();
+			}
 	}
 	public static void main(String[] args) {
-		int n=5;
+		Scanner stdin = new Scanner(System.in);
+		int n = stdin.nextInt();
 		losango(n);
 	}
 }

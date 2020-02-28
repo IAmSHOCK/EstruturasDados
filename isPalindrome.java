@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class isPalindrome
 {
-    public static boolean isPalindrome(int N, String dada)
+    public static boolean isPalindrome(String dada)
     {
         String str = "";//string ao contrario
 
@@ -12,26 +12,23 @@ public class isPalindrome
         {
            str += dada.charAt(j);
         }
-        if(str.equals(dada))
-        {
-            return true;
-        }
-        return false; 
+        return (str.equals(dada));
+
     }
     public static void main(String[] args)
     {
-        Scanner scan = new Scanner(System.in);
+        Scanner stdin = new Scanner(System.in);
 
-        int N = scan.nextInt();
+        int N = stdin.nextInt();
 
         String str = new String();
-
         System.out.println(N);
+        str = stdin.nextLine();
 
-        for(int i=1;i<=N;i++)
+        while(stdin.hasNextLine())
         {
-            str = scan.nextLine();
-            if(isPalindrome(N,str))
+            str = stdin.nextLine();
+            if(isPalindrome(str))
             {
                 System.out.println("sim");
             }
@@ -40,6 +37,6 @@ public class isPalindrome
                 System.out.println("nao");
             }
         }
-        scan.close();
+        stdin.close();
     }
 }
