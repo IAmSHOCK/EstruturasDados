@@ -10,12 +10,17 @@ public class Primes
 	}
 	public static void main(String[] args) 
 	{
-		int n=1000000;
+
+		int n=20;
+		System.out.print(n "= ");
 		for (int i=2; i<=n; i++)
 		{
 			if (isPrime(i))
 			{
-				System.out.println(i);
+				if (n%i==0)
+				{
+					n=n/i;
+				}
 			}
 		}
 	}
