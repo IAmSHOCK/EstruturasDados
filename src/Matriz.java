@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Matrix {
-   int data[][]; // os elementos da matriz em si
+   char data[][]; // os elementos da matriz em si
    int rows;     // numero de linhas
    int cols;     // numero de colunas
 
@@ -29,6 +29,7 @@ class Matrix {
       }
       return ans;
    }
+   
    public static Matrix identity(int n)
    {
       Matrix m = new Matrix(n,n);
@@ -71,6 +72,7 @@ class Matrix {
       }
       return sum;
    }
+
    public Matrix multiply(Matrix m)
    {
       if(cols!=m.rows) return null;
