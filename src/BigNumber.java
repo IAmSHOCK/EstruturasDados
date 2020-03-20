@@ -15,7 +15,7 @@ public class BigNumber
 			number[k] = (n.charAt(i)-'0');
 		}
 	}
-
+	
 	public boolean equals(BigNumber n)
 	{
 		if(size!=n.size) return false;
@@ -38,29 +38,25 @@ public class BigNumber
 
 	public BigNumber add(BigNumber n)
 	{
-		BigNumber soma = new BigNumber("0");
-		soma.size = this.size;
+		BigNumber soma = new BigNumber("");
+		for(int k=0; k<size+1; k++) soma.number[k]=0;
 
 		if(this.size > n.size) 
 			{
 				int difSize = this.size - n.size;
-				transform(difSize);
+				n.transform(difSize);
 			}
 		else if(this.size < n.size)
 		{
 			int difSize = n.size - this.size;
-			n.transform(difSize);
+			transform(difSize);
 		}
+		soma.size = this.size+1;
 
 		int tmp;
 		for(int i=0; i<this.size; i++)
 		{
-			if(soma.number[i]>9)
-			{
-				soma.number[i+1] += soma.number[i]/10; 
-				soma.number[i]   += soma.number[i]%10;
-			}
-
+			
 			if((tmp = this.number[i]+n.number[i]) > 9) 
 			{
 				soma.number[i]   += tmp%10;
@@ -70,47 +66,41 @@ public class BigNumber
 			{
 				soma.number[i]+=this.number[i]+n.number[i];
 			}
+			if(soma.number[i]>9)
+			{
+				soma.number[i+1] += soma.number[i]/10; 
+				soma.number[i]   = soma.number[i]%10;
+			}
 		}
+		if(soma.number[size]==0) soma.size--;
+
+		this.redo();
+		n.redo();
+
 		return soma;
 	}
 
-	public void transform(int difSize)
+	private void transform(int difSize)
 	{
 
-		for(int i=size-1; i<difSize; i++)
+		for(int i=size; i<(size+difSize); i++)
 			{
 				number[i]=0;
 			}
 			size+=difSize;
 	}
-
-	/*public BigNumber multiply(BigNumber n)
-	{	
-
-	}*/
-
-	public static void main(String[] args)
+	public void redo()
 	{
-		Scanner input = new Scanner (System.in);
-		BigNumber n1 = new BigNumber("1234567890");
-      	System.out.println(n1); // Escreve "1234567890"
+		int i = this.size;
+		while(this.number[i]==0)
+		{
+			i--;
+		}
+		this.size=i+1;
+	}
 
-      	BigNumber n2 = new BigNumber("42");
-      	BigNumber n3 = new BigNumber("1234567890");
-      	System.out.println(n1.equals(n2)); // Escreve "false"
-      	System.out.println(n1.equals(n3)); // Escreve "true"
-      
-      	BigNumber n4 = new BigNumber("46711237126582920746212");
-      	BigNumber n5 = new BigNumber("8765432110");
-      	BigNumber n6 = n1.add(n3);
-      	System.out.println(n6); // Escreve "2469135780"
-      	BigNumber n7 = n1.add(n4);
-      	System.out.println(n7); // Escreve "46711237126584155314102"
-      	BigNumber n8 = n1.add(n5);
-      	System.out.println(n8); // Escreve "10000000000"
-
-      
-
-      	
-   }
+	public BigNumber multiply(BigNumber n)
+	{	
+		
+	}
 }
