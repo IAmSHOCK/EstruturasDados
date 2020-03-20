@@ -38,37 +38,37 @@ public class BigNumber
 
 	public BigNumber add(BigNumber n)
 	{
-		BigNumber soma = new BigNumber("0")
-		System.out.println(soma);
+		BigNumber soma = new BigNumber("0");
+		soma.size = this.size;
 
-		if(size > n.size) 
+		if(this.size > n.size) 
 			{
-				int difSize = size - n.size;
+				int difSize = this.size - n.size;
 				transform(difSize);
 			}
-		else  
+		else if(this.size < n.size)
 		{
-			int difSize = n.size - size;
+			int difSize = n.size - this.size;
 			n.transform(difSize);
 		}
 
 		int tmp;
-		for(int i=size; i>=0; i--)
+		for(int i=0; i<this.size; i++)
 		{
 			if(soma.number[i]>9)
 			{
-				soma.number[i-1] += soma.number[i]/10; 
+				soma.number[i+1] += soma.number[i]/10; 
 				soma.number[i]   += soma.number[i]%10;
 			}
 
-			if((tmp = number[i]+n.number[i]) > 9) 
+			if((tmp = this.number[i]+n.number[i]) > 9) 
 			{
 				soma.number[i]   += tmp%10;
-				soma.number[i-1] += tmp/10;
+				soma.number[i+1] += tmp/10;
 			}
 			else 
 			{
-				soma.number[i]+=number[i]+n.number[i];
+				soma.number[i]+=this.number[i]+n.number[i];
 			}
 		}
 		return soma;
