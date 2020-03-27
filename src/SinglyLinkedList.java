@@ -118,7 +118,67 @@ public class SinglyLinkedList<T> {
       size--;
       return valor;
    }
-   
+
+   public SinglyLinkedList<T> copy()
+   {
+      SinglyLinkedList<T> s = new SinglyLinkedList<>();
+
+      if(isEmpty()) return s;
+
+      Node <T> cur = first;
+      while(cur!=null)
+      {
+         s.addLast(cur.getValue());
+         cur = cur.getNext();
+      }
+      return s;
+   }
+
+   public void duplicate()
+   {
+      Node<T> cur=first;
+      while(cur!=null)
+      {
+         Node<T> newNode = new Node<>(cur.getValue(), cur.getNext());
+         cur.setNext(newNode);
+         cur = cur.getNext().getNext();
+         size++;
+      }
+   }
+
+   public int count(T value)
+   {
+      int count = 0;
+      Node<T> cur = first;
+      while(cur!=null)
+      {
+         if(cur.getValue().equals(value))count++;
+         cur = cur.getNext();
+      }
+      return count;
+   }
+
+   public void removeAll(T value)
+   {
+      Node<T> cur = first;
+      if(cur==null) return;
+      if(cur.getValue().equals(value)) 
+         {
+            first=first.getNext();
+            cur = first;
+            size--;
+         }
+      while(cur.getNext()!=null)
+      {
+         if(cur.getNext().getValue().equals(value))
+         {
+            cur.setNext(cur.getNext().getNext());
+            size--;
+         }
+         cur = cur.getNext();
+      }
+   }
+            
    // Converte a lista para uma String
    public String toString() {
       String str = "{";      

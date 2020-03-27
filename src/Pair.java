@@ -1,9 +1,9 @@
-public class Pair
+public class Pair<A,B>
 {
-	private int x;
-	private int y;
+	private A x;
+	private B y;
 
-	Pair(int x, int y)
+	Pair(A x, B y)
 	{
 		this.x = x;
 		this.y = y;
