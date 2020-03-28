@@ -162,12 +162,14 @@ public class SinglyLinkedList<T> {
    {
       Node<T> cur = first;
       if(cur==null) return;
-      if(cur.getValue().equals(value)) 
+
+      while(cur != null && (cur.getValue()).equals(value)) 
          {
             first=first.getNext();
             cur = first;
             size--;
          }
+      if(first==null) return;
       while(cur.getNext()!=null)
       {
          if(cur.getNext().getValue().equals(value))
@@ -175,7 +177,8 @@ public class SinglyLinkedList<T> {
             cur.setNext(cur.getNext().getNext());
             size--;
          }
-         cur = cur.getNext();
+         else 
+            cur = cur.getNext();
       }
    }
             
