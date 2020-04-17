@@ -5,6 +5,7 @@ class Cliente
 	String nome;
 	int seg_cheg;
 	int num_prod;
+	
 	Cliente()
 	{
 		this.nome = "";
