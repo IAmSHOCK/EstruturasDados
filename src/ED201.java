@@ -6,27 +6,24 @@ public class ED201
 	static int nMusicas;
 	static int[] musicas;
 	static boolean[] used;
+	static int max;
 
-	public static int solve(int cur, int v[])
+	public static void solve(int cur, int v[])
 	{
 		int sum = 0;
-		int tmp1, tmp2;
 		if (cur == v.length) 
       	{ 
       		for (int i=0; i<v.length; i++) 
             	if (used[i]) sum+= v[i];
-            return sum;
+            if(sum > max && sum <= viagem) max = sum;
       	} 
       	else 
       	{                  // Se nao terminamos, continuar a gerar
         	used[cur] = true;      // Subconjuntos que incluem o elemento actual
-        	tmp1 = solve(cur+1, v);// Chamada recursiva
+        	solve(cur+1, v);// Chamada recursiva
         	used[cur] = false;     // Subconjuntos que nao incluem o el. actual
-        	tmp2 = solve(cur+1, v);// Chamada recursiva
-        	if(tmp1 > tmp2 && tmp1 <= viagem) return tmp1;
-        	if(tmp2 > tmp1 && tmp2 <= viagem) return tmp2;
+        	solve(cur+1, v);// Chamada recursiva
         }
-        return 0;
 	}
 
 	static void input(Scanner in, int nMusicas, int[] musicas)
@@ -46,6 +43,8 @@ public class ED201
 		musicas = new int[nMusicas];
 		input(in, nMusicas, musicas);
 		used = new boolean[nMusicas];
-		System.out.println(solve(0, musicas));
+		max = 0;
+		solve(0, musicas);
+		System.out.println(max);
 	}
 }
