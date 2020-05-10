@@ -5,9 +5,7 @@
 // Algoritmo:
 //
 //	Flag 1: 
-//	Fazer um ciclo desde o 2º dia ate ao ultimo (o 1º dia ja foi contabilizado
-//	pois é a inicialização das variáveis e o numero de casos novos são os casos do
-//	próprio dia), de seguida, dentro do ciclo: 
+//	Fazer um ciclo desde o 2º dia ate ao ultimo,dentro do ciclo: 
 //		-calcula-se o numero de casos;
 //		-verificar se é maior que o max;
 //		-verificar se é menor que o min;
@@ -23,16 +21,23 @@
 // 		 atual há (para aumentar a quantidade de períodos de baixa propagação);
 //		-Se no caso atual a subida percentual <= 5%, aumenta-se o tamanho do período
 //		 de baixa propagação em 1 dia e coloca-se a flag bef a true para no proximo
-//		 caso nao ser considerado um periodo de dias extra. De seguida verifica-se se o
-//		 tamanho do período de baixa propagação é o maior até agora e, se sim,
+//		 caso nao ser considerado um periodo de dias extra. De seguida verifica-se se
+// 		 o tamanho do período de baixa propagação é o maior até agora e, se sim,
 //		 guarda-se esse tamanho em maxTamanho;
 //		-Se no caso atual nao houver a subida percentual <= 5%, então o tamanho do
 //		 período de baixa propagação reseta para 0 e a flag a false.
 //	No final imprime-se os valores pedidos.
 //	Complexidade: Θn, n = num dias.
 //
-// Flag 3:
-
+//	Flag 3:
+//	Fazer um ciclo para descobrir o tamanho maximo do grafico e colocar num array a
+//  quantidade de # em cada coluna.
+//	Criar uma matrix para guardar os . e os #.
+//	Fazer um ciclo para percorrer os dias, dentro do ciclo:
+//		-um ciclo para gerar os pontos;
+//		-um ciclo para gerar os cardinais.
+//	Complexidade: Θn * Θp, n = num dias, p = numero maximo de #.
+//------------------------------------------------------------------------------------
 
 import java.util.Scanner;
 
@@ -74,16 +79,16 @@ public class ED231
 		}
 	}
 
-	static  void solve1()
+	static void solve1()
 	{
-		int min = dias[0];
-		int max = dias[0];
+		int min = dias[1] - dias[0];
+		int max = 0;
 		int dif;
 		for(int i = 1; i < dias.length; i++)
 		{
 			dif = dias[i] - dias[i-1];
 			if(dif > max) max = dif;
-			if(dif < min) min = dif;
+			else if(dif < min) min = dif;
 		}
 		System.out.printf("%d %d%n", min, max);
 	}
@@ -116,37 +121,36 @@ public class ED231
 
 	static void solve3()
 	{
-
 		gerar_chars();
 		print_chars();
 	}	
 
 	static void gerar_chars()
 	{
-		int[] numChars = new char[nDias];
+		int[] numChars = new int[nDias];
 		max = dias[0]/100;		
 
-		for (int i = 1; i < nDias; i++) 
+		for (int i = 0; i < nDias; i++) 
 		{
 			if(dias[i]/100 > max) max = dias[i]/100;
 			numChars[i] = dias[i]/100;
 		}
 
-		matrix = new char[nDias][max];
+		matrix = new char[max][nDias];
 		for (int i = 0; i < nDias ; i++)
 		{
 			int numPoints = max - numChars[i];
 			int j = 0;
 			int index = numPoints;
-			while(index > 0)
+			while(index > 0) //colocar os .
 			{
-				matrix[i][j] = '.';
+				matrix[j][i] = '.';
 				index--;
 				j++;
 			}
-			while(numPoints < numChars)
+			while(numPoints < max) // colocar os #
 			{
-				matrix[i][j] = '#';
+				matrix[j][i] = '#';
 				numPoints++;
 				j++;
 			}
@@ -155,9 +159,11 @@ public class ED231
 
 	static void print_chars()
 	{
-		for(int i = 0; i < max, i++)
+		for(int i = 0; i < max; i++)
 		{
-			System.out.println(Arrays.toString(matrix[i]));
+			for(int j = 0; j < nDias; j++)
+				System.out.print(matrix[i][j]);
+			System.out.println();
 		}
 	}
 
