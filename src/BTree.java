@@ -171,4 +171,62 @@ public class BTree<T> {
       if(n.getLeft() != null && n.getRight() == null) return false;
       return strict(n.getLeft()) && strict(n.getRight());
    }
+
+   public T path(String s) 
+   {
+      BTNode <T> curr = root;
+      for (int i = 0; i < s.length(); i++) 
+      {
+         if(s.charAt(i) == 'E') curr = curr.getLeft();
+         else if(s.charAt(i) == 'D') curr = curr.getRight();
+         else if(s.charAt(i) == 'R') curr = root;
+      }
+      return curr.getValue();
+   }
+
+   public int internal()
+   {
+      if(root == null) return 0;
+      return this.numberNodes() - this.numberLeafs();
+   }
+
+   public void cut(int d)
+   {
+      if(d <= 0) 
+      {
+         root = null;
+         return;
+      }
+      else if(this.depth() < d) return;
+      
+      while(this.depth() >= d)
+      {
+         cut(root);
+         d--;
+      }
+      
+
+   }
+
+   private void cut(BTNode<T> n)
+   {
+      BTNode<T> l = n.getLeft();
+      BTNode<T> r = n.getRight();
+   }
+
+    public void tree() {
+      tree(root);
+      System.out.println();
+   }
+
+   private void tree(BTNode<T> n) {
+      if (n==null) 
+      {
+         System.out.print(" N");
+         return;
+      }
+      System.out.print(" " + n.getValue() );
+      tree(n.getLeft());
+      tree(n.getRight());
+   }
 }

@@ -1,7 +1,12 @@
-6
-6 3 2 N N 5 N N 10 8 N N 25 N N
-6 3 2 N N 5 N N 10 N N
-6 3 N N 10 N N
-6 3 2 N N N 10 8 N N 25 N N
-6 3 2 N N 5 N N N
-6 3 N 5 N N 10 N 25 N N
+3
+10
+StarWarsVIII 5
+BladeRunner2049 8
+ShapeOfWater 4
+Solo 6
+StarWarsVIII 2
+Solo 4
+BladeRunner2049 4
+ShapeOfWater 1
+GetOut 9
+BladeRunner2049 6
