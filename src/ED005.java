@@ -14,7 +14,7 @@ public class ED005
 		{
 			ch = s.charAt(i);
 			if(ch >= '0' && ch <= '9') stack.push(ch-'0');	
-			else if(!Character.isSpace(ch) )
+			else if(!Character.isSpace(ch))
 			{
 				if(stack.size() < 2) 
 				{
@@ -49,7 +49,6 @@ public class ED005
 		else 
 		{
 			System.out.println("Expressao Incorrecta");
-
 		}
 	}
 

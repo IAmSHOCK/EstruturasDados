@@ -83,105 +83,7 @@ public class SinglyLinkedList<T> {
       }
       size--;
    }
-
-   public T get(int pos)
-   {
-      if(pos<0) return null;
-      Node<T> cur = first;
-      for(int i=1; i<=pos; i++)
-      {
-         cur = cur.getNext();
-         if(cur==null) return null;
-      }
-      return cur.getValue();
-   }
-
-   public T remove(int pos)
-   {
-      if(pos<0 || pos>size || size==0) return null;
-      Node<T> cur = first;
-      if(pos==0)
-      {
-         T valor = cur.getValue();
-         first = first.getNext();
-         size--;
-         return valor;
-      } 
-      for(int i=1; i<pos; i++)
-      {
-         cur = cur.getNext();
-         if(cur==null) return null;
-      }
-      if(cur.getNext()==null) return null;
-      T valor = cur.getNext().getValue();
-      cur.setNext(cur.getNext().getNext());
-      size--;
-      return valor;
-   }
-
-   public SinglyLinkedList<T> copy()
-   {
-      SinglyLinkedList<T> s = new SinglyLinkedList<>();
-
-      if(isEmpty()) return s;
-
-      Node <T> cur = first;
-      while(cur!=null)
-      {
-         s.addLast(cur.getValue());
-         cur = cur.getNext();
-      }
-      return s;
-   }
-
-   public void duplicate()
-   {
-      Node<T> cur=first;
-      while(cur!=null)
-      {
-         Node<T> newNode = new Node<>(cur.getValue(), cur.getNext());
-         cur.setNext(newNode);
-         cur = cur.getNext().getNext();
-         size++;
-      }
-   }
-
-   public int count(T value)
-   {
-      int count = 0;
-      Node<T> cur = first;
-      while(cur!=null)
-      {
-         if(cur.getValue().equals(value))count++;
-         cur = cur.getNext();
-      }
-      return count;
-   }
-
-   public void removeAll(T value)
-   {
-      Node<T> cur = first;
-      if(cur==null) return;
-
-      while(cur != null && (cur.getValue()).equals(value)) 
-         {
-            first=first.getNext();
-            cur = first;
-            size--;
-         }
-      if(first==null) return;
-      while(cur.getNext()!=null)
-      {
-         if(cur.getNext().getValue().equals(value))
-         {
-            cur.setNext(cur.getNext().getNext());
-            size--;
-         }
-         else 
-            cur = cur.getNext();
-      }
-   }
-            
+   
    // Converte a lista para uma String
    public String toString() {
       String str = "{";      
@@ -194,4 +96,44 @@ public class SinglyLinkedList<T> {
       str += "}";
       return str;
    }
+
+      public SinglyLinkedList<T> cut(int a, int b) 
+   {
+      SinglyLinkedList<T> nova = new SinglyLinkedList<>();
+      Node<T> cur = this.first;
+      int pos = 0;
+      if(pos < a) nova.first = this.first;
+      while(pos < a)
+      {
+         nova.addLast(cur.getValue());
+         cur = cur.getNext();
+         pos++;
+      }
+      while(pos < b+1)
+      {
+         cur = cur.getNext();
+         pos++;
+      }
+      while(cur != null)
+      {
+         nova.addLast(cur.getValue());
+         cur = cur.getNext();
+      }
+      return nova;
+   }
+
+   public void shift(int k)
+   {
+      T tmp;
+      for (int i = 0; i < k; i++) 
+      {
+         tmp = this.getFirst();
+         this.removeFirst();
+         this.addLast(tmp);
+      }
+   }
+
+
+
+   
 }

@@ -229,4 +229,41 @@ public class BTree<T> {
       tree(n.getLeft());
       tree(n.getRight());
    }
+
+   public int count()
+   {
+      return count(root);
+   }
+
+   private int count(BTNode<T> n)
+   {
+      int num = 0;
+      if(n.getLeft() != null && n.getRight() == null) return (1 + count(n.getLeft()));
+      if(n.getLeft() == null && n.getRight() != null) return (1 + count(n.getRight()));
+      if(n.getLeft() == null && n.getRight() == null) return 0;
+      else
+      {
+         return (count(n.getRight()) + count(n.getLeft()));
+      }
+  }
+
+   static int maxlvl;
+  public int level(T v)
+  {  
+
+      maxlvl = -2;
+      level(root, v, 0);
+      return maxlvl;
+  }
+
+  private void level(BTNode<T> n, T v, int size)
+  {
+      if(n != null)
+      {
+         if(n.getValue() == v && size > maxlvl) maxlvl = size;
+         level(n.getRight(), v, size+1);
+         level(n.getLeft(), v, size+1);
+      }
+      else return;
+  }
 }

@@ -11,11 +11,22 @@ public class TestSinglyLinkedList
    public static void main(String[] args) 
    {
       // Criacao de lista de inteiros
-      SinglyLinkedList<Character> list  = new SinglyLinkedList<Character>();
+      SinglyLinkedList<Character> list  = new SinglyLinkedList<>();
       
       list.addLast('a');
+      list.addLast('b');
+      list.addLast('c');
+      list.addLast('d');
+      list.addLast('e');
+      list.shift(4);
       System.out.println(list);
-      list.removeAll('a');
-      System.out.println(list);
+      SinglyLinkedList<Integer> list2  = new SinglyLinkedList<>();
+      list2.addLast(1);
+      list2.addLast(2);
+      list2.addLast(42);
+      list2.shift(0);
+      System.out.println(list2);
+
+
    }
 }
